@@ -1,4 +1,9 @@
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY src /Users/dharanianimireddy/demo/demoapp/src
+COPY pom.xml /Users/dharanianimireddy/demo/demoapp
+RUN mvn -f /Users/dharanianimireddy/demo/demoapp/pom.xml clean package
+
 FROM java:8
+COPY --from=build /Users/dharanianimireddy/demo/demoapp/target/dockerdemo.jar /usr/local/lib/demo.jar
 EXPOSE 8080
-ADD /target/dockerdemo.jar dockerdemo.jar
-ENTRYPOINT ["java", "-jar", "dockerdemo.jar"]
+ENTRYPOINT ["java", "-jar", "/usr/local/lib/demo.jar"]
