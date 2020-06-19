@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: toharikrdockerdemo 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: toharikrdockerdemo 
+    spec:
+      containers:
+        - name: toharikrdockerdemo 
+          image: devopsazure66containerregistry.azurecr.io/toharikrdockerdemo
+          ports:
+          - containerPort: 8080
